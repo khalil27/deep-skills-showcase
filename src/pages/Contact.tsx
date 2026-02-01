@@ -25,9 +25,24 @@ const Contact = () => {
   ];
 
   const socialLinks = [
-    { icon: Facebook, href: "https://facebook.com/deepskills", label: "Facebook", color: "hover:bg-blue-600" },
-    { icon: Linkedin, href: "https://linkedin.com/company/deepskills", label: "LinkedIn", color: "hover:bg-blue-700" },
-    { icon: Instagram, href: "https://instagram.com/deepskills", label: "Instagram", color: "hover:bg-pink-600" },
+    {
+      icon: Facebook,
+      href: "https://www.facebook.com/profile.php?id=61586258282080&locale=fr_FR",
+      label: "Facebook",
+      color: "hover:bg-blue-600"
+    },
+    {
+      icon: Linkedin,
+      href: "https://www.linkedin.com/company/deep-skills-learning/",
+      label: "LinkedIn",
+      color: "hover:bg-blue-700"
+    },
+    {
+      icon: Instagram,
+      href: "https://www.instagram.com/deepskillstn/",
+      label: "Instagram",
+      color: "hover:bg-pink-600"
+    },
   ];
 
   return (
