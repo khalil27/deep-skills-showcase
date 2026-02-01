@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import pkg from 'whatsapp-web.js';
 import qrcode from 'qrcode-terminal';
+import fs from 'fs';
 
 const { Client, LocalAuth } = pkg;
 
@@ -24,11 +25,41 @@ let isClientReady = false;
 const initializeWhatsApp = () => {
   const puppeteerConfig = {
     headless: true,
-    args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage']
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',
+      '--disable-gpu',
+      '--single-process'
+    ]
   };
 
-  // Pour Render.com, utiliser Chromium system
-  if (process.env.PUPPETEER_EXECUTABLE_PATH) {
+  // Chercher Chrome/Chromium sur le système
+  const possiblePaths = [
+    '/usr/bin/chromium-browser',    // Render.com
+    '/usr/bin/chromium',             // Linux standard
+    '/usr/bin/google-chrome',        // Google Chrome Linux
+    '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', // macOS
+    'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',   // Windows
+    'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe'
+  ];
+
+  let executablePath = null;
+  for (const path of possiblePaths) {
+    try {
+      if (fs.existsSync(path)) {
+        executablePath = path;
+        console.log(`✅ Found Chrome/Chromium at: ${path}`);
+        break;
+      }
+    } catch (e) {
+      // Continue searching
+    }
+  }
+
+  if (executablePath) {
+    puppeteerConfig.executablePath = executablePath;
+  } else if (process.env.PUPPETEER_EXECUTABLE_PATH) {
     puppeteerConfig.executablePath = process.env.PUPPETEER_EXECUTABLE_PATH;
   }
 
