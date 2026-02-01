@@ -3,26 +3,28 @@ import cors from 'cors';
 import pkg from 'whatsapp-web.js';
 import qrcode from 'qrcode-terminal';
 import fs from 'fs';
+import path from 'path';
 
 // IMPORTANT: Set environment variables BEFORE importing whatsapp-web.js
-process.env.PUPPETEER_SKIP_CHROMIUM_DOWNLOAD = 'true';
+process.env.PUPPETEER_SKIP_CHROMIUM_DOWNLOAD = 'false';
 
-// Find Chrome/Chromium on the system
+// Try to find Chrome/Chromium on the system
 const possiblePaths = [
-  '/usr/bin/chromium-browser',    // Render.com
+  '/usr/bin/chromium-browser',    // Render.com Aptfile
   '/usr/bin/chromium',             // Linux standard
   '/usr/bin/google-chrome',        // Google Chrome Linux
-  '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', // macOS
-  'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',   // Windows
+  '/opt/render/.cache/puppeteer/chrome/linux-chrome',  // Puppeteer cache on Render
+  path.join(process.cwd(), 'node_modules', 'puppeteer', '.local-chromium'),
+  'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
   'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe'
 ];
 
 let chromePath = null;
-for (const path of possiblePaths) {
+for (const p of possiblePaths) {
   try {
-    if (fs.existsSync(path)) {
-      chromePath = path;
-      console.log(`✅ Found Chrome/Chromium at: ${path}`);
+    if (fs.existsSync(p)) {
+      chromePath = p;
+      console.log(`✅ Found Chrome/Chromium at: ${p}`);
       break;
     }
   } catch (e) {
@@ -30,8 +32,10 @@ for (const path of possiblePaths) {
   }
 }
 
+// Set the path if found, otherwise let Puppeteer find it
 if (chromePath) {
   process.env.PUPPETEER_EXECUTABLE_PATH = chromePath;
+  console.log(`Using Chrome from: ${chromePath}`);
 }
 
 const { Client, LocalAuth } = pkg;
