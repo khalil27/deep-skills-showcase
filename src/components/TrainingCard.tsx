@@ -66,6 +66,11 @@ const TrainingCard = ({ training, index }: TrainingCardProps) => {
             </div>
           </div>
 
+          {/* Price */}
+          <div className="mb-6 p-3 rounded-lg bg-primary/10 border border-primary/20">
+            <p className="text-lg font-bold text-primary">{training.price} DT</p>
+          </div>
+
           {/* CTA */}
           <Link to={`/formation/${training.id}`}>
             <Button 

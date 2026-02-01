@@ -14,6 +14,7 @@ export interface Training {
   mode: "Présentiel" | "Online" | "Hybride";
   image: string;
   category: string;
+  price: number;
 }
 
 export const trainings: Training[] = [
@@ -36,10 +37,11 @@ export const trainings: Training[] = [
       { title: "Module 4 - Contenu", content: "Plan éditorial, formats simples, constance" },
       { title: "Module 5 - Plan d'action", content: "Objectifs, indicateurs, routine hebdomadaire" }
     ],
-    duration: "12h",
+    duration: "5h",
     mode: "Online",
     image: trainingReact,
-    category: "Soft Skills"
+    category: "Soft Skills",
+    price: 70
   },
   {
     id: "dev",
@@ -60,10 +62,11 @@ export const trainings: Training[] = [
       { title: "Module 4 - Outils", content: "Git, organisation du code, conventions" },
       { title: "Module 5 - Projet", content: "Mini-projet guidé" }
     ],
-    duration: "20h",
+    duration: "48h",
     mode: "Présentiel",
     image: trainingDevops,
-    category: "Développement"
+    category: "Développement",
+    price: 250
   },
   {
     id: "n8n-automation",
@@ -84,14 +87,15 @@ export const trainings: Training[] = [
       { title: "Module 4 - Webhooks", content: "Entrants/sortants, filtres, conditions" },
       { title: "Module 5 - Cas pratiques", content: "Workflows métiers prêts à l'emploi" }
     ],
-    duration: "16h",
+    duration: "15h",
     mode: "Hybride",
     image: trainingDevops,
-    category: "Automatisation"
+    category: "Automatisation",
+    price: 150
   },
   {
-    id: "securite",
-    title: "Sécurité",
+    id: "cyber-security",
+    title: "Cyber Security",
     shortDescription: "Protégez vos systèmes et bonnes pratiques essentielles.",
     fullDescription: "Cette formation vous donne les bases pour sécuriser les environnements, comprendre les menaces et appliquer les bonnes pratiques de cybersécurité.",
     objectives: [
@@ -108,10 +112,86 @@ export const trainings: Training[] = [
       { title: "Module 4 - Réseau", content: "Bases de segmentation, firewall" },
       { title: "Module 5 - Gestion d'incident", content: "Détection, réponse, documentation" }
     ],
-    duration: "18h",
+    duration: "20h",
     mode: "Présentiel",
     image: trainingSecurity,
-    category: "Sécurité"
+    category: "Sécurité",
+    price: 180
+  },
+  {
+    id: "power-bi",
+    title: "Power BI",
+    shortDescription: "Créez des tableaux de bord et rapports interactifs.",
+    fullDescription: "Maîtrisez Power BI pour transformer vos données en insights visuels et actionnables. Créez des rapports professionnels et des tableaux de bord performants.",
+    objectives: [
+      "Importer et nettoyer les données",
+      "Créer des modèles de données",
+      "Concevoir des visualisations percutantes",
+      "Créer des tableaux de bord interactifs",
+      "Publier et partager les rapports"
+    ],
+    program: [
+      { title: "Module 1 - Fondamentaux", content: "Interface, concepts, types de données" },
+      { title: "Module 2 - Données", content: "Import, transformation, nettoyage" },
+      { title: "Module 3 - Modèles", content: "Relations, mesures, DAX de base" },
+      { title: "Module 4 - Visualisations", content: "Graphiques, KPI, rapports interactifs" },
+      { title: "Module 5 - Partage", content: "Publication, dashboards, permissions" }
+    ],
+    duration: "30h",
+    mode: "Hybride",
+    image: trainingUxui,
+    category: "Data & Analytics",
+    price: 200
+  },
+  {
+    id: "linux",
+    title: "Linux",
+    shortDescription: "Maîtrisez le système d'exploitation Linux.",
+    fullDescription: "Apprenez les fondamentaux de Linux, la ligne de commande, la gestion des fichiers et les concepts essentiels pour administrer et utiliser Linux efficacement.",
+    objectives: [
+      "Comprendre les concepts de Linux",
+      "Maîtriser la ligne de commande",
+      "Gérer les fichiers et permissions",
+      "Gérer les utilisateurs et les services",
+      "Sécuriser un système Linux"
+    ],
+    program: [
+      { title: "Module 1 - Fondamentaux", content: "Distribution, noyau, architecture" },
+      { title: "Module 2 - Ligne de commande", content: "Commandes essentielles, shell, scripts" },
+      { title: "Module 3 - Système de fichiers", content: "Répertoires, permissions, propriétaires" },
+      { title: "Module 4 - Administration", content: "Utilisateurs, groupes, paquets" },
+      { title: "Module 5 - Services", content: "Daemons, logs, sécurité de base" }
+    ],
+    duration: "20h",
+    mode: "Présentiel",
+    image: trainingDevops,
+    category: "Infrastructure",
+    price: 180
+  },
+  {
+    id: "test-logiciel",
+    title: "Test Logiciel",
+    shortDescription: "Maîtrisez les techniques et outils de test logiciel.",
+    fullDescription: "Apprenez à tester efficacement les applications logicielles, identifier les bugs et garantir la qualité avec des méthodes éprouvées.",
+    objectives: [
+      "Comprendre les types et niveaux de test",
+      "Écrire des cas de test efficaces",
+      "Utiliser les outils de test automation",
+      "Gérer les défauts et traçabilité",
+      "Appliquer les bonnes pratiques de QA"
+    ],
+    program: [
+      { title: "Module 1 - Fondamentaux", content: "Types de test, niveaux, stratégies" },
+      { title: "Module 2 - Test manuel", content: "Cas de test, exécution, documentation" },
+      { title: "Module 3 - Test automation", content: "Selenium, Cypress, frameworks" },
+      { title: "Module 4 - Performance", content: "Outils, métriques, optimisation" },
+      { title: "Module 5 - Gestion de défauts", content: "Bug tracking, cycles de test" }
+    ],
+    duration: "20h",
+    mode: "Hybride",
+    image: trainingUxui,
+    category: "QA & Testing",
+    price: 180
   }
 ];
 
