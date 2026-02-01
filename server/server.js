@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import pkg from 'whatsapp-web.js';
 import qrcode from 'qrcode-terminal';
+import QRCode from 'qrcode';
 import fs from 'fs';
 import path from 'path';
 
@@ -54,6 +55,7 @@ app.use(express.json());
 // État du client WhatsApp
 let whatsappClient = null;
 let isClientReady = false;
+let lastQRCode = null;
 
 // Initialiser le client WhatsApp
 const initializeWhatsApp = () => {
@@ -80,6 +82,7 @@ const initializeWhatsApp = () => {
   whatsappClient.on('qr', (qr) => {
     console.log('\n📱 QR Code received. Scan it with your WhatsApp phone:');
     qrcode.generate(qr, { small: true });
+    lastQRCode = qr; // Sauvegarder le QR code
   });
 
   whatsappClient.on('ready', () => {
@@ -97,6 +100,132 @@ const initializeWhatsApp = () => {
 
 // Initialiser WhatsApp au démarrage
 initializeWhatsApp();
+
+// Endpoint pour afficher le QR code visuellement
+app.get('/qr', async (req, res) => {
+  if (!lastQRCode) {
+    return res.status(503).send(`
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>WhatsApp QR Code</title>
+        <style>
+          body { font-family: Arial; text-align: center; padding: 40px; }
+          .status { color: red; font-size: 18px; }
+        </style>
+      </head>
+      <body>
+        <h1>🔄 En attente du QR Code...</h1>
+        <p class="status">Le serveur initialise WhatsApp...</p>
+        <p>Veuillez attendre quelques secondes et rafraîchir la page.</p>
+        <script>
+          // Rafraîchir automatiquement toutes les 2 secondes
+          setTimeout(() => location.reload(), 2000);
+        </script>
+      </body>
+      </html>
+    `);
+  }
+
+  try {
+    const qrImage = await QRCode.toDataURL(lastQRCode);
+    
+    res.send(`
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>WhatsApp QR Code</title>
+        <style>
+          body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+          }
+          .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 500px;
+          }
+          h1 {
+            color: #333;
+            margin-top: 0;
+          }
+          .qr-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+          }
+          .qr-container img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+          }
+          .instructions {
+            background: #f0f0f0;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+          }
+          .instructions h3 {
+            margin-top: 0;
+          }
+          .instructions ol {
+            margin: 10px 0;
+            padding-left: 20px;
+          }
+          .instructions li {
+            margin: 8px 0;
+          }
+          .status {
+            color: #667eea;
+            font-weight: bold;
+            margin: 20px 0;
+          }
+          .emoji { font-size: 24px; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <h1><span class="emoji">📱</span> Connexion WhatsApp</h1>
+          
+          <div class="qr-container">
+            <img src="${qrImage}" alt="QR Code" />
+          </div>
+          
+          <p class="status">✅ QR Code généré - Scannez maintenant!</p>
+          
+          <div class="instructions">
+            <h3>Comment scanner:</h3>
+            <ol>
+              <li>Ouvrez <strong>WhatsApp</strong> sur votre téléphone</li>
+              <li>Allez à <strong>Paramètres</strong> <span class="emoji">⚙️</span></li>
+              <li>Sélectionnez <strong>Appareils connectés</strong></li>
+              <li>Tapez <strong>Connecter un appareil</strong></li>
+              <li>Scannez ce code QR avec votre téléphone</li>
+            </ol>
+          </div>
+          
+          <p style="color: #999; font-size: 12px;">
+            La session sera sauvegardée - plus besoin de scanner après!
+          </p>
+        </div>
+      </body>
+      </html>
+    `);
+  } catch (error) {
+    res.status(500).send('Erreur lors de la génération du QR code');
+  }
+});
 
 // Endpoint pour envoyer un message WhatsApp AU CLIENT
 app.post('/api/send-to-client', async (req, res) => {
@@ -230,10 +359,12 @@ app.get('/', (req, res) => {
   res.json({ 
     message: 'Deep Skills Formation API Server',
     whatsappStatus: isClientReady ? 'Ready' : 'Not Connected',
+    qrUrl: '/qr',
     endpoints: {
       health: 'GET /api/health',
       whatsappStatus: 'GET /api/whatsapp-status',
-      sendWhatsApp: 'POST /api/send-whatsapp'
+      sendWhatsApp: 'POST /api/send-whatsapp',
+      qrCode: 'GET /qr'
     }
   });
 });
