@@ -1,14 +1,1 @@
-{
-  "buildCommand": "apt-get update && apt-get install -y chromium-browser libnss3 libxss1 libasound2 libappindicator1 libindicator7 xdg-utils fonts-liberation libgbm1 libxkbcommon0 libdrm2 && npm install && npx puppeteer browsers install chrome",
-  "startCommand": "node server/server.js",
-  "envVars": [
-    {
-      "key": "PUPPETEER_SKIP_CHROMIUM_DOWNLOAD",
-      "value": "false"
-    },
-    {
-      "key": "PUPPETEER_EXECUTABLE_PATH",
-      "value": "/usr/bin/chromium-browser"
-    }
-  ]
-}
+{}
