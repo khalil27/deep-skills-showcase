@@ -22,12 +22,19 @@ let isClientReady = false;
 
 // Initialiser le client WhatsApp
 const initializeWhatsApp = () => {
+  const puppeteerConfig = {
+    headless: true,
+    args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage']
+  };
+
+  // Pour Render.com, utiliser Chromium system
+  if (process.env.PUPPETEER_EXECUTABLE_PATH) {
+    puppeteerConfig.executablePath = process.env.PUPPETEER_EXECUTABLE_PATH;
+  }
+
   whatsappClient = new Client({
     authStrategy: new LocalAuth(),
-    puppeteer: {
-      headless: true,
-      args: ['--no-sandbox', '--disable-setuid-sandbox']
-    }
+    puppeteer: puppeteerConfig
   });
 
   whatsappClient.on('qr', (qr) => {
