@@ -1,13 +1,21 @@
 import { Link } from "react-router-dom";
-import { Facebook, Linkedin, Instagram, Mail, Phone } from "lucide-react";
+import { Facebook, Linkedin, Instagram, Mail, Phone, MapPin } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
-    { icon: Facebook, href: "https://facebook.com/deepskills", label: "Facebook" },
-    { icon: Linkedin, href: "https://linkedin.com/company/deepskills", label: "LinkedIn" },
-    { icon: Instagram, href: "https://instagram.com/deepskills", label: "Instagram" },
+    {
+      icon: Facebook,
+      href: "https://www.facebook.com/profile.php?id=61586258282080&locale=fr_FR",
+      label: "Facebook"
+    },
+    {
+      icon: Linkedin,
+      href: "https://www.linkedin.com/company/deep-skills-learning/",
+      label: "LinkedIn"
+    },
+    { icon: Instagram, href: "https://www.instagram.com/deepskillstn/", label: "Instagram" },
   ];
 
   return (
@@ -17,8 +25,12 @@ const Footer = () => {
           {/* Brand */}
           <div className="md:col-span-2">
             <Link to="/" className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-lg gradient-bg flex items-center justify-center">
-                <span className="text-primary-foreground font-display font-bold text-xl">D</span>
+              <div className="w-10 h-10 rounded-lg bg-card border border-border flex items-center justify-center overflow-hidden">
+                <img
+                  src="/android-chrome-192x192.png"
+                  alt="Deep Skills"
+                  className="w-full h-full object-contain"
+                />
               </div>
               <span className="font-display font-bold text-xl text-foreground">
                 Deep<span className="gradient-text">Skills</span>
@@ -89,6 +101,12 @@ const Footer = () => {
                   <Phone size={18} />
                   +216 50 985 534
                 </a>
+              </li>
+              <li>
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <MapPin size={18} />
+                  Ariana Ennaser 1
+                </div>
               </li>
             </ul>
           </div>
