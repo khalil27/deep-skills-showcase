@@ -2,12 +2,11 @@ FROM node:22-slim
 
 # Install Chromium and dependencies
 RUN apt-get update && apt-get install -y \
-    chromium-browser \
+    chromium \
     libnss3 \
     libxss1 \
     libasound2 \
     libappindicator1 \
-    libindicator7 \
     xdg-utils \
     fonts-liberation \
     libgbm1 \
@@ -26,7 +25,7 @@ RUN cd server && npm install && cd ..
 
 # Set environment variables for Puppeteer
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
-ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
 
 # Copy server code
 COPY server ./server
