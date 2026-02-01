@@ -13,8 +13,8 @@ const Contact = () => {
     {
       icon: Phone,
       label: "WhatsApp",
-      value: "+216 12 345 678",
-      href: "https://wa.me/21612345678",
+      value: "+216 50 985 534",
+      href: "https://wa.me/21650985534",
     },
     {
       icon: MapPin,
@@ -125,7 +125,7 @@ const Contact = () => {
                     Contactez-nous directement sur WhatsApp pour une réponse instantanée à vos questions.
                   </p>
                   <a
-                    href="https://wa.me/21612345678?text=Bonjour%20je%20souhaite%20avoir%20plus%20d%27informations%20sur%20vos%20formations"
+                    href="https://wa.me/21650985534?text=Bonjour%20je%20souhaite%20avoir%20plus%20d%27informations%20sur%20vos%20formations"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2 w-full px-6 py-4 gradient-bg text-primary-foreground font-semibold rounded-lg glow-primary hover:opacity-90 transition-opacity"

@@ -53,7 +53,7 @@ const Index = () => {
               à votre carrière tech.
             </p>
             <a
-              href="https://wa.me/21612345678?text=Bonjour%20je%20souhaite%20avoir%20plus%20d%27informations%20sur%20vos%20formations"
+              href="https://wa.me/21650985534?text=Bonjour%20je%20souhaite%20avoir%20plus%20d%27informations%20sur%20vos%20formations"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-4 gradient-bg text-primary-foreground font-semibold rounded-lg glow-primary hover:opacity-90 transition-opacity"

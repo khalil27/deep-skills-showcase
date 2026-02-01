@@ -40,7 +40,7 @@ const TrainingDetail = () => {
   const whatsappMessage = encodeURIComponent(
     `Bonjour, je souhaite réserver une place pour la formation ${training.title}`
   );
-  const whatsappLink = `https://wa.me/21612345678?text=${whatsappMessage}`;
+  const whatsappLink = `https://wa.me/21650985534?text=${whatsappMessage}`;
 
   return (
     <Layout>
