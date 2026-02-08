@@ -1,3 +1,10 @@
+import personalBrandingImage from "@/assets/affiche-personalbranding.jpg";
+import n8nAutomationImage from "@/assets/formation-n8n.jpg";
+import devWebImage from "@/assets/formation-dev.jpg";
+import securityImage from "@/assets/formation-secutiy.jpg";
+import powerBiImage from "@/assets/formation-powerbi.jpg";
+import linuxImage from "@/assets/formation-linux.jpg";
+import testLogicielImage from "@/assets/formation-test.jpg";
 import trainingReact from "@/assets/training-react.jpg";
 import trainingDevops from "@/assets/training-devops.jpg";
 import trainingUxui from "@/assets/training-uxui.jpg";
@@ -38,8 +45,8 @@ export const trainings: Training[] = [
       { title: "Module 5 - Plan d'action", content: "Objectifs, indicateurs, routine hebdomadaire" }
     ],
     duration: "5h",
-    mode: "Online",
-    image: trainingReact,
+    mode: "Présentiel",
+    image: personalBrandingImage,
     category: "Soft Skills",
     price: 70
   },
@@ -64,7 +71,7 @@ export const trainings: Training[] = [
     ],
     duration: "48h",
     mode: "Présentiel",
-    image: trainingDevops,
+    image: devWebImage,
     category: "Développement",
     price: 250
   },
@@ -88,8 +95,8 @@ export const trainings: Training[] = [
       { title: "Module 5 - Cas pratiques", content: "Workflows métiers prêts à l'emploi" }
     ],
     duration: "15h",
-    mode: "Hybride",
-    image: trainingDevops,
+    mode: "Présentiel",
+    image: n8nAutomationImage,
     category: "Automatisation",
     price: 150
   },
@@ -114,7 +121,7 @@ export const trainings: Training[] = [
     ],
     duration: "20h",
     mode: "Présentiel",
-    image: trainingSecurity,
+    image: securityImage,
     category: "Sécurité",
     price: 180
   },
@@ -138,8 +145,8 @@ export const trainings: Training[] = [
       { title: "Module 5 - Partage", content: "Publication, dashboards, permissions" }
     ],
     duration: "30h",
-    mode: "Hybride",
-    image: trainingUxui,
+    mode: "Présentiel",
+    image: powerBiImage,
     category: "Data & Analytics",
     price: 200
   },
@@ -164,7 +171,7 @@ export const trainings: Training[] = [
     ],
     duration: "20h",
     mode: "Présentiel",
-    image: trainingDevops,
+    image: linuxImage,
     category: "Infrastructure",
     price: 180
   },
@@ -188,8 +195,8 @@ export const trainings: Training[] = [
       { title: "Module 5 - Gestion de défauts", content: "Bug tracking, cycles de test" }
     ],
     duration: "20h",
-    mode: "Hybride",
-    image: trainingUxui,
+    mode: "Présentiel",
+    image: testLogicielImage,
     category: "QA & Testing",
     price: 180
   }

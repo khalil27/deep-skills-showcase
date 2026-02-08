@@ -1,6 +1,5 @@
 import { useParams, Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import { ArrowLeft, Clock, Monitor, Users, Target, BookOpen, CheckCircle, Loader } from "lucide-react";
+import { ArrowLeft, Clock, Users, Target, BookOpen, CheckCircle, Loader } from "lucide-react";
 import { useState } from "react";
 import Layout from "@/components/Layout";
 import { getTrainingById } from "@/data/trainings";
@@ -119,6 +118,7 @@ const TrainingDetail = () => {
         <img
           src={training.image}
           alt={training.title}
+          loading="lazy"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
@@ -138,11 +138,7 @@ const TrainingDetail = () => {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Main Content */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="lg:col-span-2 space-y-8"
-            >
+            <div className="lg:col-span-2 space-y-8">
               {/* Title & Description */}
               <div className="bg-card rounded-xl border border-border p-8">
                 <span className="inline-block px-3 py-1 text-sm font-medium rounded-full gradient-bg text-primary-foreground mb-4">
@@ -168,16 +164,13 @@ const TrainingDetail = () => {
                 </div>
                 <ul className="space-y-3">
                   {training.objectives.map((objective, index) => (
-                    <motion.li
+                    <li
                       key={index}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 }}
                       className="flex items-start gap-3"
                     >
                       <CheckCircle size={20} className="text-primary mt-0.5 flex-shrink-0" />
                       <span className="text-muted-foreground">{objective}</span>
-                    </motion.li>
+                    </li>
                   ))}
                 </ul>
               </div>
@@ -194,11 +187,8 @@ const TrainingDetail = () => {
                 </div>
                 <div className="space-y-4">
                   {training.program.map((module, index) => (
-                    <motion.div
+                    <div
                       key={index}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.1 }}
                       className="bg-secondary/50 rounded-lg p-4 border border-border/50"
                     >
                       <h3 className="font-semibold text-foreground mb-2">
@@ -207,16 +197,14 @@ const TrainingDetail = () => {
                       <p className="text-sm text-muted-foreground">
                         {module.content}
                       </p>
-                    </motion.div>
+                    </div>
                   ))}
                 </div>
               </div>
-            </motion.div>
+            </div>
 
             {/* Sidebar */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+            <div
               transition={{ delay: 0.2 }}
               className="lg:col-span-1"
             >
@@ -260,7 +248,7 @@ const TrainingDetail = () => {
                   Réservation gratuite via WhatsApp
                 </p>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>

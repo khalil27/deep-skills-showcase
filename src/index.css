@@ -132,4 +132,17 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  /* Grid Background Pattern */
+  .grid-pattern {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background-image: 
+      linear-gradient(hsl(var(--primary)) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--primary)) 1px, transparent 1px);
+    background-size: 50px 50px;
+    opacity: 0.15;
+  }
 }

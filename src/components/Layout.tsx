@@ -8,9 +8,12 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col relative">
+      {/* Grid Background - All Pages */}
+      <div className="grid-pattern" />
+      
       <Header />
-      <main className="flex-1">{children}</main>
+      <main className="flex-1 relative z-20">{children}</main>
       <Footer />
     </div>
   );
